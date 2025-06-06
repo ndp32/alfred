@@ -86,7 +86,7 @@ schema <- list(
 )
 
 # --- UI SETUP --------------------------------------------------------------- #
-source("FRED_API_KEY.R")
+set_api_key(Sys.getenv("FRED_API_KEY"))
 build_query_functions(schema) # build all 31 api call functions
 
 attach(fred)
