@@ -34,8 +34,10 @@ but has not been thoroughly tested. If you find any bugs, please let me know.
 
 ## API Key
 
-The script reads your FRED API key from the `FRED_API_KEY` environment
-variable. Set it in your R session before sourcing the file:
+API requests require a FRED API key. Use `load_api_key()` to initialise the
+package. The function first checks the `FRED_API_KEY` environment variable and
+then the file `~/.fred_api_key`. When called interactively, it will prompt for a
+key if one was not found and save it to that file for future sessions.
 
 ```r
 Sys.setenv(FRED_API_KEY = "your_api_key_here")

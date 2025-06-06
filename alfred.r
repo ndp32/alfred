@@ -50,6 +50,27 @@ set_api_key <- \(api_key) {
   .api_key <<- api_key
 }
 
+# load api key from environment, file or user prompt                 [user facing]
+load_api_key <- \(
+    env_var = "FRED_API_KEY",
+    file = "~/.fred_api_key",
+    prompt = interactive()) {
+  key <- Sys.getenv(env_var, unset = "")
+  if (!nzchar(key) && file.exists(path.expand(file))) {
+    key <- readLines(path.expand(file), warn = FALSE)[1]
+  }
+  if (!nzchar(key) && isTRUE(prompt)) {
+    cat("Enter FRED API key: ")
+    key <- readline()
+    if (nzchar(key)) {
+      dir.create(dirname(path.expand(file)), showWarnings = FALSE, recursive = TRUE)
+      writeLines(key, path.expand(file))
+    }
+  }
+  if (nzchar(key)) set_api_key(key) else warning("FRED API key not found")
+  invisible(key)
+}
+
 # --- FRED API OPTIONS ------------------------------------------------------- #
 schema <- list(
   category = c('category_id'),
@@ -86,7 +107,7 @@ schema <- list(
 )
 
 # --- UI SETUP --------------------------------------------------------------- #
-set_api_key(Sys.getenv("FRED_API_KEY"))
+load_api_key()
 build_query_functions(schema) # build all 31 api call functions
 
 attach(fred)
