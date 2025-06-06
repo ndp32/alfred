@@ -20,3 +20,10 @@ wrap in more streamlined functions.
 
 Note that I put this script together in a hurry. It works well for me,
 but has not been thoroughly tested. If you find any bugs, please let me know.
+
+## API Key
+
+API requests require a FRED API key. Use `load_api_key()` to initialise the
+package. The function first checks the `FRED_API_KEY` environment variable and
+then the file `~/.fred_api_key`. When called interactively, it will prompt for a
+key if one was not found and save it to that file for future sessions.
