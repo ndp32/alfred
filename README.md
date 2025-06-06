@@ -12,6 +12,9 @@ To gain a better understanding of the inputs and outputs of these functions,
 see the FRED website, which contains extensive documentation on the API. 
 https://fred.stlouisfed.org/docs/api/fred/
 
+Please make sure your use of FRED data complies with their
+[data usage policy](https://research.stlouisfed.org/docs/api/terms_of_use.html).
+
 The goal here is to give you as much access to FRED data as the API
 affords us. However, in most cases, the output of the functions provided is 
 pretty bulky. Nested lists are common; more information than you want 
